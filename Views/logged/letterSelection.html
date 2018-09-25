@@ -1,0 +1,15 @@
+<loading ng-show="loading" margin="10"></loading>
+<div ng-hide="loading" class="row justify-content-md-center">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body letter-random">
+                {{letterRandom}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href ng-click="play();" class="btn btn-success btn-custom">Comenzar</a>
+            </div>
+        </div>
+    </div>
+</div>

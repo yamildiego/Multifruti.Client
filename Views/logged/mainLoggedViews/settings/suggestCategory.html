@@ -1,0 +1,11 @@
+<h5 class="title title-info">Sugerir categoria</h5>
+<form ng-submit="sendCategory(category)" style="background: #fff; border: 1px solid #DDD; padding: 10px;" autocomplete="off" method="post" accept-charset="utf-8">
+    <div class="form-group row">
+        <label for="inputCategory" class="col-sm-4 col-form-label">Sugerir categoria</label>
+        <div class="col-sm-8">
+            <input type="text" required ng-model="category" class="form-control" id="inputCategory">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Aceptar</button>
+    <button type="button" ng-click="getSettings()" class="btn btn-danger">Cancelar</button>
+</form>

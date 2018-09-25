@@ -1,0 +1,28 @@
+<h5 class="title title-info">Preferencias</h5>
+<div ng-repeat="sett in settingsPreference" ng-show="sett.show" ng-click="sett.function()" class="card-setting">
+    <div class="card-icon">
+        <i class="{{sett.class}}"></i>
+    </div>
+    <div class="card-description" ng-class="{'border-cero': settingsPreference.length  == ($index + 1)}">{{sett.name}}</div>
+</div>
+<h5 class="title title-info">Social</h5>
+<div ng-repeat="sett in settingsSocial" ng-show="sett.show" ng-click="sett.function()" class="card-setting">
+    <div class="card-icon">
+        <i class="{{sett.class}}"></i>
+    </div>
+    <div class="card-description">{{sett.name}}</div>
+</div>
+<div class="card-setting">
+    <div class="card-icon">
+        <i class="fas fa-thumbs-up"></i>
+    </div>
+    <div class="card-description border-cero" style="padding-top: 14px;">
+        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FJulia-Carteras-292299557632835%2F&width=300&layout=button_count&action=like&size=large&show_faces=false&share=false&height=55&appId=219923048574583" width="300" height="55" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+    </div>
+</div>
+<div class="card-setting card-alone" ng-click="suggestCategory()">
+    <div class="card-icon">
+        <i class="fas fa-lightbulb"></i>
+    </div>
+    <div class="card-description">Sugerir categoria</div>
+</div>

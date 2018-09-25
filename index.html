@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es" ng-app="Game">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, shrink-to-fit=no, minimum-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+        <title>MultiFruti!</title>
+        <!-- Bootstrap CSS -->
+        
+        <link rel="apple-touch-icon" sizes="144x144" href="Image/Icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="Image/Icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="Image/Icon/favicon-16x16.png">
+        <link rel="manifest" href="Image/Icon/site.webmanifest">
+        <link rel="mask-icon" href="Image/Icon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="Content/node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="Content/fontawesome-free-5.0.6/svg-with-js/js/fontawesome-all.min.js"></script>
+        <script src="Content/node_modules/jquery/dist/jquery.slim.min.js"></script>
+        <script src="Content/node_modules/underscore/underscore-min.js"></script>
+        <script src="Content/node_modules/popper.js/dist/umd/popper.min.js"></script>
+        <script src="Content/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- Minifado -->
+        <script src="Content/node_modules/angular/angular.min.js"></script>
+        <script src="Content/node_modules/angular-route/angular-route.min.js"></script>
+        <!-- <script src="Scripts/fullApp.js"></script> -->
+        <script src="App/app.js"></script>
+        <script src="App/route.js"></script>
+        <script src="App/config.js"></script>
+        <script src="App/Controllers/mainController.js"></script>
+        <script src="App/Controllers/outside/homeController.js"></script>
+        <script src="App/Controllers/inside/letterSelectionController.js"></script>
+        <script src="App/Controllers/inside/mainLoggedController.js"></script>
+        <script src="App/Controllers/inside/newGameController.js"></script>
+        <script src="App/Controllers/inside/playController.js"></script>
+        <script src="App/Controllers/inside/shopLivesController.js"></script>
+        <script src="App/Controllers/inside/showBattleController.js"></script>
+        <script src="App/Controllers/inside/showRoundController.js"></script>
+        <script src="App/Services/AuthService.js"></script>
+        <script src="App/Services/CommonFunctionsService.js"></script>
+        <script src="App/Services/FaceService.js"></script>
+        <script src="App/Services/ModalService.js"></script>
+        <script src="App/Directives/listFriends/listFriends.js"></script>
+        <script src="App/Directives/modal/modal.js"></script>
+        <script src="App/Directives/focusMe.js"></script>
+        <script src="App/Directives/loading.js"></script>
+        <script src="App/Directives/myEnter.js"></script>
+        <script src="App/Directives/progressbar.js"></script>
+        <script src="App/Directives/timer.js"></script>
+        <link rel="stylesheet" href="Content/css/fonts.css">
+        <link rel="stylesheet" href="Content/css/boostrap.css">
+        <link rel="stylesheet" href="Content/css/style.css">
+        <link rel="stylesheet" href="Content/css/responsive.css">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1060621337461813",
+        enable_page_level_ads: true
+        });
+        </script>
+        <link rel="stylesheet" href="App/Directives/modal/modal.css">
+    </head>
+    <body ng-controller="mainController" class="container-fluid" ng-style="{'background-color':bg}">
+        <div class="errors" ng-hide="hidden" ng-class="{fade: startFade}">
+            <div class="alert not-selectable" ng-class="'alert-'+ alert.type" ng-repeat="alert in alertList" style="cursor: default;">
+                <a href class="close" ng-click="close(alert.index)" data-dismiss="alert" aria-label="close" title="close">×</a> {{alert.text}}
+            </div>
+        </div>
+        <loading ng-show="loadMain" margin="10" color="#fff"></loading>
+        <div class="main" ng-hide="loadMain" ng-style="{'background-color':bgMain}">
+            <div ng-view></div>
+        </div>
+    </body>
+</html>

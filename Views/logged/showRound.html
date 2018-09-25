@@ -1,0 +1,87 @@
+<loading ng-show="loading" margin="10"></loading>
+<div ng-hide="loading" class="card">
+    <div class="small" style="position: absolute; margin: 5px; z-index: 8;">
+        <a class="btn btn-info" href ng-click="back()" style="z-index: 1;">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+    </div>
+    <div class="card-header-main" style="padding-bottom: 0;">
+        <div class="row">
+            <div class="col-4">
+                <div class="image text-center">
+                    <img ng-src="{{user.image}}" class="img-thumbnail" style="width: 45px;" />
+                </div>
+            </div>
+            <div class="col-4">
+                <h5 class="text-center">{{marker}}</h5>
+            </div>
+            <div class="col-4">
+                <div class="image text-center">
+                    <img src="{{opponent.image}}" class="img-thumbnail" style="width: 45px;" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6 class="text-center">{{user.name}}</h6>
+            </div>
+            <div class="col-4">
+                <h4 class="text-center" style="margin-bottom: 0px;">Round {{numberRound}}</h4>
+            </div>
+            <div class="col-4">
+                <h6 class="text-center">{{opponent.name}}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" style="position: relative; background: #fff; padding-top: 0">
+        <div ng-repeat="question in dataQuestions">
+            <div class="text-question">{{question.textQuestion}}</div>
+            <div class="answer-question">
+                <div class="points-left" style="position: relative;" ng-class="{'correct': question.dataUser.score > 0}">
+                    {{(!question.dataUser.answerText)?'-':question.dataUser.answerText }}
+                    <div ng-hide="question.dataUser.score == 0 && question.dataUser.answerText" class="points" ng-class="getClassPoints(question.dataUser.score)">+{{question.dataUser.score}}</div>
+                    <div ng-show="question.dataUser.score == 0 && question.dataUser.answerText" style="position: absolute; top: 0; left: 50%; line-height: 36px;">
+                        <button ng-if="!question.isSent && firstTime" class="btn btn-info btn-send-answer" ng-click="sendAnswer(question.dataUser.answerText, question.questionId)">
+                            Mi respuesta es correcta
+                        </button>
+                        <button ng-disabled="true" ng-if="question.isSent && !question.isApproved" class="btn btn-info btn-send-answer" style="color:#fff">
+                            Respuesta enviada
+                        </button>
+                        <button ng-disabled="true" ng-if="question.isSent && question.isApproved" class="btn btn-success btn-send-answer" style="color:#fff">
+                            Respuesta agregada
+                        </button>
+                    </div>
+                </div>
+                <div class="points-right" ng-class="{'correct': question.dataUser.score > 0}" ng-show="question.dataOpponent.score">
+                    <div class="points" ng-class="getClassPoints(question.dataOpponent.score)">+{{question.dataOpponent.score}}</div>
+                    {{question.dataOpponent.answerText}}
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 1px;">
+            <div class="col-6">
+                <span class="total-user" ng-class="{'loser' : (opponent.totalPoints > user.totalPoints), 'winner' : (opponent.totalPoints <= user.totalPoints)}">Total {{user.totalPoints}}</span>
+            </div>
+            <div class="col-6" ng-show="opponent.totalPoints">
+                <span class="total-user" ng-class="{'loser' : (opponent.totalPoints < user.totalPoints),'winner' : (opponent.totalPoints >= user.totalPoints)}">Total {{opponent.totalPoints}}</span>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div ng-class="{'col-6': backRoundId, 'col-12': !backRoundId}">
+                <a href ng-show="backRoundId" ng-click="goToRound(backRoundId)" class="btn btn-warning btn-lg btn-show" style="margin:auto; display: block; color: #fff;">
+                    <i class="fa fa-chevron-left"></i>Anterior round
+                </a>
+            </div>
+            <div ng-class="{'col-6': backRoundId, 'col-12': !backRoundId}">
+                <a href ng-show="nextRoundId" ng-click="goToRound(nextRoundId)"="" class="btn btn-warning btn-lg btn-show" style="margin:auto; display: block; color: #fff;">Siguiente round <i class="fa fa-chevron-right"></i>
+                </a>
+                <a ng-show="!nextRoundId && !finished" class="btn btn-info disabled btn-lg btn-show" style="margin:auto; display: block; color: #fff;">
+                    Esperando...
+                </a>
+                <a ng-show="!nextRoundId && finished" class="btn btn-info btn-lg btn-show" href ng-click="showBattle()" style="margin:auto; display: block; color: #fff;">
+                    Ver partida<i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

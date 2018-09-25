@@ -1,0 +1,52 @@
+<loading ng-show="loading" margin="10"></loading>
+<div ng-show="!loading && withoutOpponent">
+    <div class="card">
+        <div class="card-header-main">
+            <div class="float-left small">
+                <a class="btn btn-info" href ng-click="back()">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+            </div>
+            <div class="card-custom-title not-selectable">Nueva partida</div>
+        </div>
+    </div>
+    <div ng-show="!listFriends">
+        <button ng-click="gameRandom()" class="btn btn-success btn-lg btn-custom" style="margin-top: 5%;">
+            Oponente aletorio
+        </button>
+        <button ng-click="gameFriends()" class="btn btn-light btn-fb btn-lg btn-custom" style="margin-top: 5%;margin-bottom: 5%;">
+            <i class="fab fa-facebook-f"></i>Amigo
+        </button>
+    </div>
+    <list-friends ng-show="listFriends" btns="true"></list-friends>
+</div>
+<div ng-show="!loading && !withoutOpponent" class="card">
+    <div class="card-header-main">
+        <div class="float-left small">
+            <a class="btn btn-info" href ng-click="back()">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+        </div>
+        <div class="card-custom-title not-selectable">Nueva partida</div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="image text-center">
+                    <img ng-src="{{dataBattle.userImage}}" class="img-thumbnail" />
+                </div>
+                <h4 class="text-center">{{dataBattle.userName}}</h4>
+            </div>
+            <div class="col-4">
+                <h1 class="text-center" style="margin-top: 20px;">0 - 0</h1>
+            </div>
+            <div class="col-4">
+                <div class="image text-center">
+                    <img ng-src="{{dataBattle.opponentImage}}" class="img-thumbnail" />
+                </div>
+                <h4 class="text-center">{{dataBattle.opponentName}}</h4>
+            </div>
+        </div>
+        <a href ng-click="play()" class="btn btn-success btn-lg btn-custom">Jugar</a>
+    </div>
+</div>

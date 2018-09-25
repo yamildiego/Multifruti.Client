@@ -1,0 +1,39 @@
+<h5 class="title title-info">Premium</h5>
+<div class="card-coins-shop card-coin-border" style="margin-bottom: 20px;">
+    <div class="card-image">
+        <i class="fas fa-bullhorn"></i>
+        <i class="fas fa-ban"></i>
+    </div>
+    <div class="card-text">
+        Eliminar publicidad
+    </div>
+    <div class="card-price">
+        <button class="btn btn-info">USD 3,99</button>
+    </div>
+</div>
+<h5 class="title title-info">Coins</h5>
+<div class="card-coins-shop" ng-repeat="product in products" ng-click="product.function(product.id)" ng-class="{'card-coin-border':products.length == ($index + 1)}">
+    <div class="card-image">
+        <img ng-src="{{'Image/coins/'+product.img}}" class="img-fluid" />
+    </div>
+    <div class="card-text">
+        {{product.coins}} Coins
+    </div>
+    <div class="card-price">
+        <button class="btn btn-success">{{product.price}}</button>
+    </div>
+</div>
+<div style="margin-top: 30px;">
+    <h5 class="title title-info">Vidas</h5>
+    <div class="card-coins-shop" ng-repeat="product in lives" ng-class="{'card-coin-border':products.length == ($index + 1)}">
+        <div class="card-image" style="text-align: center;">
+            <img ng-src="{{'Image/lives/'+product.img}}" class="img-fluid" />
+        </div>
+        <div class="card-text">
+            {{product.lives}}
+        </div>
+        <div class="card-price" style="">
+            <button class="btn btn-success">{{product.price}}</button>
+        </div>
+    </div>
+</div>

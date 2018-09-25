@@ -1,0 +1,36 @@
+<loading ng-show="loading" margin="10"></loading>
+<div ng-hide="loading" class="card">
+    <div class="card-header-main">
+        <div class="float-left small">
+            <a class="btn btn-info" href ng-click="back()">
+                <i class="fa fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="card-custom-title not-selectable">Obtener más vidas</div>
+    </div>
+    <div class="card-more-lives">
+        <div class="heart">
+            <div class="number-lives" ng-class="{'rotate': dataUser.lives == -10}">{{(dataUser.lives == -10)? '8' :dataUser.lives}}</div>
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="timer-more-lives">
+            <timer ng-if="time" countdown="time" interval="1000" finish-callback="resetTimer()">
+                {{minutes}}:{{seconds}}
+            </timer>
+            <span ng-if="!time">Lleno</span>
+        </div>
+    </div>
+    <div style="margin-top: 30px;">
+        <div class="card-coins-shop" ng-repeat="product in products" ng-class="{'card-coin-border':products.length == ($index + 1)}">
+            <div class="card-image" style="text-align: center;">
+                <img ng-src="{{'Image/lives/'+product.img}}" class="img-fluid" />
+            </div>
+            <div class="card-text">
+                {{product.lives}}
+            </div>
+            <div class="card-price" style="">
+                <button class="btn btn-success">{{product.price}}</button>
+            </div>
+        </div>
+    </div>
+</div>

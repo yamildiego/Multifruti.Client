@@ -1,0 +1,36 @@
+<loading ng-show="loadingFB" margin="10" color="{{color}}"></loading>
+<div ng-show="!loadingFB" style="margin-left: 2%; margin-right: 2%;">
+    <button ng-show="btnLoginFB" ng-click="loginFB()" class="btn btn-light btn-login btn-fb btn-custom">
+        <i class="fab fa-facebook-f"></i>Iniciar sesión con Facebook
+    </button>
+    <div ng-hide="btnLoginFB">
+        <button ng-click="facebookFriends()" class="btn btn-light btn-login btn-fb btn-custom" style="margin-top: 2%;">
+            <i class="fab fa-facebook-f"></i>Invitar amigos
+        </button>
+        <input type="text" ng-model="data.querySearch" style="margin-top: 2%;" class="form-control" placeholder="Buscar amigo">
+        <div class="title title-my-turn">
+            <span>Amigos</span>
+            <div class="float-right" style="margin-right: 10%!important;">Niveles</div>
+        </div>
+        <div ng-show="users.length == 0" style="background: white; text-align: center; color: #666; line-height: 55px; ">
+            Ninguno de tus amigo juega esta aplicacion. Invitalos
+        </div>
+        <div ng-repeat="user in users | filter: { name: data.querySearch } | orderBy:'-experience'" ng-class="{'me': user.userFBId == me}" class="user-card">
+            <div class="index">{{$index + 1}}</div>
+            <div class="user-image">
+                <img ng-if="user.image" ng-src="{{user.image}}" class="img-fluid rounded-circle" alt="avatar" />
+            </div>
+            <div class="user-name">
+                {{user.name}}
+            </div>
+            <div class="user-lvl">
+                {{CommonFunctionsService.getLvl(user.experience, 1)}}
+            </div>
+            <div class="btn-play-friend" ng-if="btns">
+                <button ng-click="playWithFriend(user.userFBId)" ng-if="user.userFBId != me" class="btn" ng-class="{'btn-info':user.play}" ng-disabled="!user.play">
+                    {{(user.play)? 'Jugar': 'Partida activa'}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

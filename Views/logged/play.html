@@ -1,0 +1,28 @@
+<loading ng-show="loading" margin="10"></loading>
+<div ng-hide="loading" class="card" style="height: 400px;">
+    <div class="card-header bg-dark text-white">
+        <div class="float-left small">
+            <button ng-disabled="finishedGame" class="btn btn-info" ng-click="capitulate()">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="progress" style="margin: 0 0 0 14%; height: 38px; text-align: center;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated not-selectable bar-time" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" progressbar total="100" current="percentageTime" ng-class="{'padding-time': (percentageTime != 0)}">{{barTime}}
+            </div>
+            <span class="not-selectable letter-show">LETRA {{letter}}</span>
+        </div>
+    </div>
+    <div class="card-body" style="position: relative;">
+        <div ng-show="finishedGame" class="circle_point_final not-selectable">{{totalScore}} Puntos</div>
+        <div ng-repeat="question in questions" class="input-group mb-3 input-anwer">
+            <div ng-show="question.score" class="point" style="display: block;">{{question.score}}
+            </div>
+            <input tabindex="{{$index + 100}}" type="text" focus-me="hasFocus($index)" ng-focus="setFocus($index)" class="form-control" autocomplete="off" ng-disabled="finishedGame || loadings[$index]" ng-model="question.answerText" placeholder="{{question.text}}" ng-class="{'cursor-default': finishedGame, 'answer_correct' : (question.answer =='OK'), 'answer_incorrect' : (question.answer == 'INCORRECT'), 'loading_input': loadings[$index]}" ng-blur="checkWord(($index + 1), question)" my-enter="checkWord(($index + 1), question, true)" style="border-bottom-left-radius: 10px!important; border-top-left-radius: 10px!important;">
+            <div class="input-group-append">
+                <button ng-click="buyAnswer(question, $index)" ng-disabled="finishedGame || (question.answer =='OK')" class="btn btn-warning" type="button">
+                    <i class="fas fa-lightbulb fa-2x" style="color:#fff;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

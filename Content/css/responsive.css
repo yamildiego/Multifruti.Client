@@ -1,0 +1,139 @@
+@media (max-width: 380px) {
+    .btn-hide {
+        display: none;
+    }
+    .card-coins-shop .card-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 420px) {
+    .title {
+        font-size: 1.0rem;
+    }
+    .btn {
+        font-size: 12px;
+        letter-spacing: 0;
+    }
+    .btn-send-answer {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+    .modal-small {
+        width: 96%!important;
+        margin: auto;
+    }
+}
+
+@media (max-width: 450px) {
+    .hide-text {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .modal-small {
+        width: 90%;
+        margin: auto;
+    }
+
+    body {
+        background: #7b7b7b;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 750px) {
+    .footer {
+        margin-left: 5%!important;
+        width: 90%!important;
+    }
+    .modal-small {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 850px) {
+    .footer {
+        margin-left: 10%!important;
+        width: 80%!important;
+    }
+    .modal-small {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media (min-width: 850px) {
+    .footer {
+        margin-left: 10%!important;
+        width: 80%!important;
+    }
+    .modal-small {
+        width: 55%;
+        margin: auto;
+    }
+}
+
+/* CUSTOM MID - Large */
+
+/*@media (min-width: 992px) and (max-width: 1070px) {
+    .my-v-m{
+        font-size: 16px
+    }
+    .card-battle .my-r-m{
+        font-size: 16px
+    }
+}
+
+
+
+@media (min-width: 1200px) {
+    body::before {
+        z-index: 1000;
+        content: "elg";
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    body::before {
+        z-index: 1000;
+        content: "lg";
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    body::before {
+        z-index: 1000;
+        content: "md";
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    body::before {
+        z-index: 1000;
+        content: "sm";
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+}
+
+@media (max-width: 576px) {
+    body::before {
+        z-index: 1000;
+        content: "esm";
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+}/*

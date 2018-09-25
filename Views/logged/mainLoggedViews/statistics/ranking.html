@@ -1,0 +1,24 @@
+<button ng-show="!btnLoginStatistics && activeStatistics == 'friends'" ng-click="facebookFriends()" class="btn btn-light btn-login btn-fb" style="margin-top: 2%;">
+<i class="fab fa-facebook-f"></i>Invitar amigos
+</button>
+<div ng-hide="btnLoginStatistics" class="title title-my-turn">
+    <span ng-show="activeStatistics == 'friends'">Amigos</span>
+    <span ng-show="activeStatistics == 'global'">Usuarios</span>
+    <div class="float-right" style="margin-right: 10%!important;">Niveles</div>
+</div>
+<button ng-show="btnLoginStatistics && activeStatistics == 'friends'" ng-click="loginGetRankingFriends()" class="btn btn-light btn-login btn-fb">
+<i class="fab fa-facebook-f"></i>Ver ranking de amigos
+</button>
+<div ng-hide="btnLoginStatistics" ng-repeat="user in users| orderBy:'-experience'" ng-class="{'me': user.userId == userFB.userId}" class="user-card">
+    <div class="index">{{$index + 1}}</div>
+    <div class="user-image">
+        <img ng-if="user.image" ng-src="{{user.image}}" class="img-fluid rounded-circle" />
+    </div>
+    <div class="user-name">
+        {{user.name}}
+    </div>
+    <div class="user-lvl">
+        {{CommonFunctionsService.getLvl(user.experience, 1)}}
+    </div>
+</div>
+<a ng-if="activeStatistics == 'global' && hasMoreUser" class="btn btn-success btn-lg btn-custom" href ng-click="loadPageRankingGlobal()"> Cargar más</a>

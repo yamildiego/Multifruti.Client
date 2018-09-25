@@ -1,0 +1,17 @@
+<div class="statistics">
+    <div class="flaps">
+        <div>
+            <a href ng-click="getOwnStatistics()" ng-class="{'active-flap': activeStatistics == 'profile'}" class="flap">Perfil</a>
+        </div>
+        <div class="margin-left-1">
+            <a href ng-click="getRankingFriends()" ng-class="{'active-flap': activeStatistics == 'friends'}" class="flap">Amigos</a>
+        </div>
+        <div class="margin-left-1">
+            <a href ng-click="getRankingGlobal()" ng-class="{'active-flap': activeStatistics == 'global'}" class="flap">Global</a>
+        </div>
+    </div>
+    <loading ng-show="loadingStatistics" margin="10" color="#fff"></loading>
+    <div ng-hide="loadingStatistics" style="padding: 2px 5px 40px 5px;">
+        <div ng-include src="viewStatistics"></div>
+    </div>
+</div>
