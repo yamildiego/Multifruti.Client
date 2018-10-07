@@ -2,7 +2,7 @@ app.service('AuthService', function($rootScope, Constants, $http, $window, FaceS
     return {
         checkAuthInside: function(callBackFunction) {
             $rootScope.loadMain = true;
-            $http.get(Constants.APIURL + 'identifier/getLoginStatus')
+            $http.get(Constants.APIURL + 'Identifier/getLoginStatus')
                 .then(function onSuccess(response) {
                     if (response.data.status == 'OK') {
                         $rootScope.userFB = response.data.userFB;
@@ -17,9 +17,9 @@ app.service('AuthService', function($rootScope, Constants, $http, $window, FaceS
                 }, function onError(response) {
                     if (response.data.status == 'expired_session') {
                         FaceService.getLoginStatus(function(responseFB) {
-                            $http.post(Constants.APIURL + 'identifier/login', { userFBID: responseFB.authResponse.userID })
+                            $http.post(Constants.APIURL + 'Identifier/login', { userFBID: responseFB.authResponse.userID })
                                 .then(function onSuccess(response) {
-                                    $http.get(Constants.APIURL + 'identifier/getLoginStatus')
+                                    $http.get(Constants.APIURL + 'Identifier/getLoginStatus')
                                         .then(function onSuccess(response) {
                                             if (data.status == 'OK') {
                                                 $rootScope.userFBID = response.data.userFB.id;

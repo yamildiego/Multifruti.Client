@@ -64,7 +64,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         $scope.loading = true;
         $scope.nameOpponent = nameOpponent;
 
-        $http.get(Constants.APIURL + 'identifier/getLoginStatus')
+        $http.get(Constants.APIURL + 'Identifier/getLoginStatus')
             .then(function onSuccess(response) {
                 if (response.data.status == 'OK') {
                     $scope.loading = false;
@@ -88,7 +88,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
     }
 
     $scope.sendCategory = function(category) {
-        $http.post(Constants.APIURL + 'logged/sendCategory', { category: category })
+        $http.post(Constants.APIURL + 'Logged/sendCategory', { category: category })
             .then(function onSuccess(response) {
                 if (response.data.status == 'OK') {
                     $timeout(function() {
@@ -109,7 +109,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         $scope.active = 'home';
         $scope.viewLogged = 'Views/logged/mainLoggedViews/main.html';
 
-        $http.get(Constants.APIURL + 'logged/getBattles')
+        $http.get(Constants.APIURL + 'Logged/getBattles')
             .then(function onSuccess(response) {
                 $scope.battlesMyTurn = response.data.battlesMyTurn;
                 $scope.battlesForApproval = response.data.battlesForApproval;
@@ -140,7 +140,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
     }
 
     $scope.loadStatistics = function() {
-        $http.get(Constants.APIURL + 'logged/getStatistics')
+        $http.get(Constants.APIURL + 'Logged/getStatistics')
             .then(function onSuccess(response) {
                 if (response.data.status === 'OK') {
                     $scope.statistics = response.data.statistics;
@@ -211,7 +211,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         else
             $scope.offset = $scope.offset + 10;
 
-        $http.get(Constants.APIURL + 'logged/getGlobal/' + $scope.offset)
+        $http.get(Constants.APIURL + 'Logged/getGlobal/' + $scope.offset)
             .then(function onSuccess(response) {
                 if (response.data.status == 'OK') {
                     if (isFirst)

@@ -5,7 +5,7 @@ app.controller('showBattleController', function($scope, $http, $routeParams, $lo
 
     $scope.initialize = function() {
         $scope.marker = '';
-        $http.get(Constants.APIURL + 'logged/getDataBattle/' + $routeParams.idBattle)
+        $http.get(Constants.APIURL + 'Logged/getDataBattle/' + $routeParams.idBattle)
             .then(function onSuccess(response) {
                 if (response.data.status === 'OK') {
                     $scope.user = response.data.user;

@@ -8,7 +8,7 @@ app.controller('letterSelectionController', function($scope, $window, $http, $lo
         $scope.pause = false;
         $scope.letterRandom = 'A';
 
-        $http.get(Constants.APIURL + 'logged/letterSelection/' + $routeParams.idBattle)
+        $http.get(Constants.APIURL + 'Logged/letterSelection/' + $routeParams.idBattle)
             .then(function onSuccess(response) {
                 if (response.data.status === 'OK') {
                     $scope.$parent.cleanErrors();

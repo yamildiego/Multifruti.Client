@@ -7,7 +7,7 @@ app.controller('showRoundController', function($scope, $location, $http, $routeP
 
     $scope.initialize = function() {
         $scope.marker = '';
-        $http.get(Constants.APIURL + 'logged/getDataRound/' + $routeParams.idRound)
+        $http.get(Constants.APIURL + 'Logged/getDataRound/' + $routeParams.idRound)
             .then(function onSuccess(response) {
                 if (response.data.status === 'OK') {
                     $scope.user = response.data.user;

@@ -8,7 +8,7 @@ app.controller('newGameController', function($scope, $window, $http, $location, 
         $scope.withoutOpponent = true;
         if ($routeParams.friendIdFb) {
             $scope.withoutOpponent = false;
-            $http.get(Constants.APIURL + 'logged/playWithFriend/' + $routeParams.friendIdFb)
+            $http.get(Constants.APIURL + 'Logged/playWithFriend/' + $routeParams.friendIdFb)
                 .then(function onSuccess(response) {
                     if (response.data.status === 'OK') {
                         $scope.$parent.cleanErrors();

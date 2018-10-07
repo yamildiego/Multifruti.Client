@@ -39,7 +39,7 @@ app.controller('playController', function($scope, $http, $location, $filter, $ti
             if (enter)
                 $scope.focusInput = $scope.getNextFocus(0, $scope.focusInput);
 
-            $http.post(Constants.APIURL + 'logged/checkWord', {
+            $http.post(Constants.APIURL + 'Logged/checkWord', {
                     roundId: $routeParams.idRound,
                     questionId: question.questionId,
                     answerText: question.answerText,
