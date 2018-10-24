@@ -1,9 +1,9 @@
-app.controller('newGameController', function($scope, $window, $http, $location, $routeParams, Constants, AuthService) {
+app.controller('newGameController', function ($scope, $window, $http, $location, $routeParams, Constants, AuthService) {
     $scope.loading = true;
     $scope.$parent.bg = '';
-    AuthService.checkAuthInside(function() { $scope.initialize(); });
+    AuthService.checkAuthInside(function () { $scope.initialize(); });
 
-    $scope.initialize = function() {
+    $scope.initialize = function () {
         $scope.listFriends = false;
         $scope.withoutOpponent = true;
         if ($routeParams.friendIdFb) {
@@ -30,7 +30,8 @@ app.controller('newGameController', function($scope, $window, $http, $location, 
             $scope.loading = false;
     }
 
-    $scope.gameRandom = function() {
+    $scope.gameRandom = function () {
+        $scope.loading = true;
         $http.get(Constants.APIURL + 'logged/newGame')
             .then(function onSuccess(response) {
                 if (response.data.status === 'OK') {
@@ -51,17 +52,17 @@ app.controller('newGameController', function($scope, $window, $http, $location, 
             });
     }
 
-    $scope.gameFriends = function() {
+    $scope.gameFriends = function () {
         $scope.listFriends = true;
     }
 
-    $scope.back = function() {
+    $scope.back = function () {
         if ($scope.listFriends)
             $scope.listFriends = false;
         else
             $location.path('/main');
     }
 
-    $scope.play = function() { $location.path("/letterSelection/" + $scope.dataBattle.id); }
+    $scope.play = function () { $location.path("/letterSelection/" + $scope.dataBattle.id); }
 
 });

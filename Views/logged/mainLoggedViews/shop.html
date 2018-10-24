@@ -14,7 +14,7 @@
 <h5 class="title title-info">Coins</h5>
 <div class="card-coins-shop" ng-repeat="product in products" ng-click="product.function(product.id)" ng-class="{'card-coin-border':products.length == ($index + 1)}">
     <div class="card-image">
-        <img ng-src="{{'Image/coins/'+product.img}}" class="img-fluid" />
+        <img ng-src="{{'Image/Coins/'+product.img}}" class="img-fluid" />
     </div>
     <div class="card-text">
         {{product.coins}} Coins
@@ -27,7 +27,7 @@
     <h5 class="title title-info">Vidas</h5>
     <div class="card-coins-shop" ng-repeat="product in lives" ng-class="{'card-coin-border':products.length == ($index + 1)}">
         <div class="card-image" style="text-align: center;">
-            <img ng-src="{{'Image/lives/'+product.img}}" class="img-fluid" />
+            <img ng-src="{{'Image/Lives/'+product.img}}" class="img-fluid" />
         </div>
         <div class="card-text">
             {{product.lives}}

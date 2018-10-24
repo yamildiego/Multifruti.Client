@@ -1,15 +1,15 @@
-app.controller('mainLoggedController', function($scope, $route, $timeout, $rootScope, $http, $location, $filter, AuthService, FaceService, Constants, ModalService, CommonFunctionsService) {
+app.controller('mainLoggedController', function ($scope, $route, $timeout, $rootScope, $http, $location, $filter, AuthService, FaceService, Constants, ModalService, CommonFunctionsService) {
     $scope.alertList = [];
     $scope.$parent.bg = '';
     $scope.$parent.bgMain = '';
     $scope.loading = true;
     $scope.CommonFunctionsService = CommonFunctionsService;
-    AuthService.checkAuthInside(function() {
+    AuthService.checkAuthInside(function () {
         $scope.loadStatistics();
         $scope.getHome();
     });
 
-    $scope.buyCoins = function(packId) {
+    $scope.buyCoins = function (packId) {
         $scope.loading = true;
 
         if (packId > 5 || packId < 0) {
@@ -20,12 +20,12 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             .then(function onSuccess(response) {
                 if (response.data.status == 'OK') {
                     FB.ui({
-                            method: 'pay',
-                            action: 'purchaseitem',
-                            product: 'http://www.meycomplementos.com/og/coins/htmls/product_' + packId + '.html',
-                            request_id: response.data.requestId
-                        },
-                        function(responseFB) {
+                        method: 'pay',
+                        action: 'purchaseitem',
+                        product: 'http://www.meycomplementos.com/og/coins/htmls/product_' + packId + '.html',
+                        request_id: response.data.requestId
+                    },
+                        function (responseFB) {
                             console.error(responseFB);
                         }
                     );
@@ -36,31 +36,31 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             });
     }
 
-    $scope.newGame = function() { $location.path('/newGame'); }
-    $scope.showLastRound = function(lastRoundId) { $location.path('/showRound/' + lastRoundId); }
-    $scope.showBattle = function(battleId) { $location.path('/showBattle/' + battleId); }
-    $scope.hideBattleYourTurn = function(battleId) { $scope.battlesYourTurn = $filter('filter')($scope.battlesYourTurn, function(btt) { return btt.battleId != battleId; }, true); }
-    $scope.hideBattleForApproval = function(battleId) { $scope.battlesForApproval = $filter('filter')($scope.battlesForApproval, function(btt) { return btt.battleId != battleId; }, true); }
-    $scope.closeModal = function(id) { ModalService.Close(id); }
-    $scope.reloadHome = function() { $route.reload(); }
-    $scope.openModalLives = function() {
-        if($rootScope.dataUser.lives != -10)
-            ModalService.Open('modal-lives');  
-     }
+    $scope.newGame = function () { $location.path('/newGame'); }
+    $scope.showLastRound = function (lastRoundId) { $location.path('/showRound/' + lastRoundId); }
+    $scope.showBattle = function (battleId) { $location.path('/showBattle/' + battleId); }
+    $scope.hideBattleYourTurn = function (battleId) { $scope.battlesYourTurn = $filter('filter')($scope.battlesYourTurn, function (btt) { return btt.battleId != battleId; }, true); }
+    $scope.hideBattleForApproval = function (battleId) { $scope.battlesForApproval = $filter('filter')($scope.battlesForApproval, function (btt) { return btt.battleId != battleId; }, true); }
+    $scope.closeModal = function (id) { ModalService.Close(id); }
+    $scope.reloadHome = function () { $route.reload(); }
+    $scope.openModalLives = function () {
+        if ($rootScope.dataUser.lives != -10)
+            ModalService.Open('modal-lives');
+    }
 
-    $scope.startGame = function(battleId, idModal) {
+    $scope.startGame = function (battleId, idModal) {
         if (idModal)
             ModalService.Close(idModal);
         $location.path('/letterSelection/' + battleId);
     }
 
-    $scope.goToShopLives = function(idModal) {
+    $scope.goToShopLives = function (idModal) {
         if (idModal)
             ModalService.Close(idModal);
         $location.path('/shopLives/');
     }
 
-    $scope.approveGame = function(battleId, nameOpponent) {
+    $scope.approveGame = function (battleId, nameOpponent) {
         $scope.loading = true;
         $scope.nameOpponent = nameOpponent;
 
@@ -81,17 +81,17 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             });
     }
 
-    $scope.suggestCategory = function() {
+    $scope.suggestCategory = function () {
         $scope.loading = false;
         $scope.active = 'settings';
         $scope.viewLogged = 'Views/logged/mainLoggedViews/settings/suggestCategory.html';
     }
 
-    $scope.sendCategory = function(category) {
+    $scope.sendCategory = function (category) {
         $http.post(Constants.APIURL + 'Logged/sendCategory', { category: category })
             .then(function onSuccess(response) {
                 if (response.data.status == 'OK') {
-                    $timeout(function() {
+                    $timeout(function () {
                         $scope.$parent.setErrorForKey('send_category');
                         $scope.getSettings();
                     });
@@ -104,7 +104,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             });
     }
 
-    $scope.getHome = function() {
+    $scope.getHome = function () {
         $scope.loading = true;
         $scope.active = 'home';
         $scope.viewLogged = 'Views/logged/mainLoggedViews/main.html';
@@ -112,7 +112,8 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         $http.get(Constants.APIURL + 'Logged/getBattles')
             .then(function onSuccess(response) {
                 $scope.battlesMyTurn = response.data.battlesMyTurn;
-                $scope.battlesForApproval = response.data.battlesForApproval;
+                $scope.battlesForMyApproval = response.data.battlesForMyApproval;
+                $scope.battlesForYourApproval = response.data.battlesForYourApproval;
                 $scope.battlesYourTurn = response.data.battlesYourTurn;
                 $scope.battlesFinished = response.data.battlesFinished;
                 $scope.loading = false;
@@ -122,7 +123,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             });
     }
 
-    $scope.getStatistics = function() {
+    $scope.getStatistics = function () {
         $scope.loading = true;
         $scope.loadingStatistics = true;
         $scope.active = 'statistics';
@@ -130,7 +131,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         AuthService.checkAuthInside($scope.getOwnStatistics);
     }
 
-    $scope.getOwnStatistics = function() {
+    $scope.getOwnStatistics = function () {
         $scope.activeStatistics = 'profile';
         $scope.viewStatistics = 'Views/logged/mainLoggedViews/statistics/profile.html';
 
@@ -139,7 +140,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         $scope.loadStatistics();
     }
 
-    $scope.loadStatistics = function() {
+    $scope.loadStatistics = function () {
         $http.get(Constants.APIURL + 'Logged/getStatistics')
             .then(function onSuccess(response) {
                 if (response.data.status === 'OK') {
@@ -157,13 +158,13 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             });
     }
 
-    $scope.loginGetRankingFriends = function() {
+    $scope.loginGetRankingFriends = function () {
         $scope.loadingStatistics = true;
 
-        FaceService.login(function(responseFB) {
-            $timeout(function() { $scope.getRankingFriends(); });
-        }, function(responseFB) {
-            $timeout(function() {
+        FaceService.login(function (responseFB) {
+            $timeout(function () { $scope.getRankingFriends(); });
+        }, function (responseFB) {
+            $timeout(function () {
                 if (responseFB.status === 'not_authorized')
                     $scope.$parent.setErrorForKey('not_authorized')
                 else
@@ -173,13 +174,13 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         });
     }
 
-    $scope.loginSettings = function() {
+    $scope.loginSettings = function () {
         $scope.loading = true;
 
-        FaceService.login(function(responseFB) {
-            $timeout(function() { $scope.getSettings(); });
-        }, function(responseFB) {
-            $timeout(function() {
+        FaceService.login(function (responseFB) {
+            $timeout(function () { $scope.getSettings(); });
+        }, function (responseFB) {
+            $timeout(function () {
                 if (responseFB.status === 'not_authorized')
                     $scope.$parent.setErrorForKey('not_authorized')
                 else
@@ -189,14 +190,14 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         });
     }
 
-    $scope.getRankingFriends = function() {
+    $scope.getRankingFriends = function () {
         $scope.activeStatistics = 'friends';
         $scope.viewStatistics = 'Views/logged/mainLoggedViews/statistics/friends.html';
         $scope.loadingStatistics = false;
         $scope.loading = false;
     }
 
-    $scope.getRankingGlobal = function() {
+    $scope.getRankingGlobal = function () {
         $scope.activeStatistics = 'global';
         $scope.viewStatistics = 'Views/logged/mainLoggedViews/statistics/ranking.html';
         $scope.loadingStatistics = true;
@@ -205,7 +206,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         $scope.loadPageRankingGlobal(true);
     }
 
-    $scope.loadPageRankingGlobal = function(isFirst) {
+    $scope.loadPageRankingGlobal = function (isFirst) {
         if (isFirst)
             $scope.offset = 0;
         else
@@ -218,14 +219,14 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
                         $scope.users = response.data.users;
                     else {
                         if (response.data.users.length == 0)
-                            $timeout(function() { $scope.hasMoreUser = false; });
+                            $timeout(function () { $scope.hasMoreUser = false; });
                         else
                             for (var i = 0; i < response.data.users.length; i++)
                                 $scope.users.push(response.data.users[i]);
                     }
 
                     if (response.data.users.length < 10)
-                        $timeout(function() { $scope.hasMoreUser = false; });
+                        $timeout(function () { $scope.hasMoreUser = false; });
                     $scope.loadingStatistics = false;
                 }
             }, function onError(response) {
@@ -234,17 +235,17 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
             });
     };
 
-    $scope.getFriends = function() {
+    $scope.getFriends = function () {
         $scope.active = 'friends';
         $scope.viewLogged = 'Views/logged/mainLoggedViews/friends.html';
         $scope.loading = false;
     }
 
-    $scope.facebookFriends = function() {
+    $scope.facebookFriends = function () {
         console.error("Invito amigos");
     }
 
-    $scope.getSettings = function() {
+    $scope.getSettings = function () {
         $scope.active = 'settings';
         $scope.settingsPreference = [
             { name: "Comprar version premium", show: true, class: "fas fa-shopping-cart", function: "" }
@@ -258,7 +259,7 @@ app.controller('mainLoggedController', function($scope, $route, $timeout, $rootS
         $scope.loading = false;
     }
 
-    $scope.getShop = function() {
+    $scope.getShop = function () {
         $scope.products = [
             { id: 1, img: 'img-coins-0.fw.png', coins: 50, price: 'USD 1,5', function: $scope.buyCoins },
             { id: 2, img: 'img-coins-1.fw.png', coins: 150, price: 'USD 2,5', function: $scope.buyCoins },

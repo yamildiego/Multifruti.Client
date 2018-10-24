@@ -15,9 +15,7 @@ body {
     width: 90px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"] {
+input[type="text"], input[type="password"], input[type="email"] {
     border-radius: 30px!important;
     line-height: 35px!important;
 }
@@ -240,8 +238,7 @@ input[type="submit"] {
     background: #628ecc;
 }
 
-.footer .icon-touch:active,
-.footer .icon-touch.active {
+.footer .icon-touch:active, .footer .icon-touch.active {
     color: #fff;
     background: #4472B2;
 }
@@ -610,6 +607,7 @@ input[type="submit"] {
 .input-anwer input {
     border-bottom-right-radius: 0!important;
     border-top-right-radius: 0!important;
+    height: 51px;
 }
 
 .padding-time {
@@ -659,7 +657,7 @@ input[type="submit"] {
     display: block;
     background: #18cc0b;
     text-align: center;
-    padding: 8px;
+    padding: 7px;
     color: #fff;
     position: absolute;
     z-index: 3;

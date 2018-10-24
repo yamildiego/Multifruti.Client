@@ -24,11 +24,11 @@
                 <div style="font-size: 11px;color: #444;">
                     <timer countdown="259200 - battle.timeLeft" interval="1000" finish-callback="hideBattleForApproval(battle.battleId)">
                         <span ng-show="days > 0" style="font-family: sans-serif">
-                        Tienes {{days + ' días, '+ hhours + ' horas'}} para jugar.
-                    </span>
+                            Tienes {{days + ' días, '+ hhours + ' horas'}} para jugar.
+                        </span>
                         <span ng-show="days == 0" style="font-family: sans-serif">
-                        Tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para jugar.
-                    </span>
+                            Tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para jugar.
+                        </span>
                     </timer>
                 </div>
             </div>
@@ -36,8 +36,8 @@
     </div>
 </div>
 <!-- Esperando tu aprovacion -->
-<h5 class="title title-waiting-approval" ng-show="battlesForApproval.length > 0">Esperando tu aprobación</h5>
-<div ng-repeat="battle in battlesForApproval" ng-click="approveGame(battle.battleId, battle.name)" class="card card-battle">
+<h5 class="title title-waiting-approval" ng-show="battlesForMyApproval.length > 0">Esperando tu aprobación</h5>
+<div ng-repeat="battle in battlesForMyApproval" ng-click="approveGame(battle.battleId, battle.name)" class="card card-battle">
     <div class="card-body">
         <div class="row">
             <div class="col-2">
@@ -51,19 +51,60 @@
                 <div style="font-size: 11px;color: #444;">
                     <timer countdown="259200 - battle.timeLeft" interval="1000" finish-callback="hideBattleForApproval(battle.battleId)">
                         <span ng-show="days > 0" style="font-family: sans-serif">
-                        Tienes {{days + ' días, '+ hhours + ' horas'}} para jugar.
-                    </span>
+                            Tienes {{days + ' días, '+ hhours + ' horas'}} para jugar.
+                        </span>
                         <span ng-show="days == 0" style="font-family: sans-serif">
-                        Tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para jugar.
-                    </span>
+                            Tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para jugar.
+                        </span>
                     </timer>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Su turno -->
-<h5 class="title title-your-turn" ng-show="battlesYourTurn.length > 0">Su turno</h5>
+<h5 class="title title-your-turn" ng-show="(battlesYourTurn.length > 0) || (battlesForYourApproval.length > 0)">
+    Su turno
+</h5>
+<div ng-repeat="battle in battlesForYourApproval" ng-click="showLastRound(battle.lastRoundId)" class="card card-battle">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <img ng-src="{{battle.image}}" class="img-fluid rounded-circle img-thumbnail" />
+                <div>{{battle.name}}</div>
+            </div>
+            <div class="col-10" style="padding-top: 24px;">
+                <div class="row info" ng-show="battle.isApproved">
+                    <div class="col-6">
+                        <i class="far fa-dot-circle" style="color:#ff4040;"></i> Round
+                        <span>{{battle.numberRound}}</span>
+                    </div>
+                    <div class="col-6 my-r-m">
+                        <i class="far fa-handshake" style="color:#67e27c;"></i> Marcador
+                        <span>{{battle.marker}}</span>
+                    </div>
+                </div>
+                <div ng-show="!battle.isApproved">
+                    <div style="font-size: 15px;color: #666;">
+                        Esperando aprobación
+                    </div>
+                </div>
+                <div style="font-size: 11px;color: #444;">
+                    <timer countdown="259200 - battle.timeLeft" interval="1000" finish-callback="hideBattleYourTurn(battle.battleId)">
+                        <span ng-show="days > 0" style="font-family: sans-serif">
+                            Tu oponente tiene {{days + ' días, '+ hhours + ' horas'}} para jugar.
+                        </span>
+                        <span ng-show="days == 0" style="font-family: sans-serif">
+                            Tu oponente tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para
+                            jugar.
+                        </span>
+                    </timer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div ng-repeat="battle in battlesYourTurn" ng-click="showLastRound(battle.lastRoundId)" class="card card-battle">
     <div class="card-body">
         <div class="row">
@@ -93,7 +134,8 @@
                             Tu oponente tiene {{days + ' días, '+ hhours + ' horas'}} para jugar.
                         </span>
                         <span ng-show="days == 0" style="font-family: sans-serif">
-                            Tu oponente tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para jugar.
+                            Tu oponente tiene {{((hours > 0) ? (hhours + ':'): '') + mminutes + ':' + sseconds}} para
+                            jugar.
                         </span>
                     </timer>
                 </div>
